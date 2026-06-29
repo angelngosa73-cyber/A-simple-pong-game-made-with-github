@@ -39,7 +39,11 @@ const ball = {
     speed: 5
 };
 
-// Input handling
+// Touch tracking for mobile
+let touchStartY = 0;
+let touchEndY = 0;
+
+// Input handling - Keyboard
 const keys = {};
 window.addEventListener('keydown', (e) => {
     keys[e.key] = true;
@@ -62,10 +66,25 @@ canvas.addEventListener('mousemove', (e) => {
     }
 });
 
-// Start button
-document.getElementById('startButton').addEventListener('click', startGame);
+// Touch movement for mobile
+canvas.addEventListener('touchmove', (e) => {
+    e.preventDefault();
+    const rect = canvas.getBoundingClientRect();
+    const touch = e.touches[0];
+    const touchY = touch.clientY - rect.top;
+    
+    if (touchY - paddleHeight / 2 > 0 && touchY + paddleHeight / 2 < canvas.height) {
+        player.y = touchY - paddleHeight / 2;
+    }
+}, { passive: false });
 
-function startGame() {
+// Start button
+const startButton = document.getElementById('startButton');
+startButton.addEventListener('click', startGame);
+startButton.addEventListener('touchend', startGame);
+
+function startGame(e) {
+    e.preventDefault();
     gameRunning = true;
     playerScore = 0;
     computerScore = 0;
