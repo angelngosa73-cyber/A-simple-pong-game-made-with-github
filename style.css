@@ -1,0 +1,117 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: linear-gradient(135deg, #1e3a8a 0%, #0f172a 100%);
+    font-family: 'Arial', sans-serif;
+}
+
+.container {
+    text-align: center;
+    padding: 20px;
+}
+
+.scoreboard {
+    display: flex;
+    justify-content: space-around;
+    width: 800px;
+    margin-bottom: 20px;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 15px;
+    border-radius: 10px;
+    backdrop-filter: blur(10px);
+}
+
+.score-section {
+    color: #fff;
+    flex: 1;
+}
+
+.score-section h2 {
+    font-size: 18px;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.score-section p {
+    font-size: 48px;
+    font-weight: bold;
+    color: #fbbf24;
+    text-shadow: 0 0 10px rgba(251, 191, 36, 0.5);
+}
+
+.game-info {
+    color: #e0e7ff;
+    margin-bottom: 15px;
+    font-size: 14px;
+    height: 20px;
+}
+
+.game-container {
+    margin-bottom: 20px;
+    box-shadow: 0 0 30px rgba(251, 191, 36, 0.3);
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+#pongCanvas {
+    display: block;
+    background: #000;
+    cursor: none;
+    border: 3px solid #fbbf24;
+}
+
+.start-button {
+    padding: 12px 30px;
+    font-size: 16px;
+    font-weight: bold;
+    background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
+    color: #000;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    box-shadow: 0 4px 15px rgba(251, 191, 36, 0.4);
+}
+
+.start-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(251, 191, 36, 0.6);
+}
+
+.start-button:active {
+    transform: translateY(0);
+}
+
+.start-button:disabled {
+    background: #6b7280;
+    cursor: not-allowed;
+    box-shadow: none;
+    color: #d1d5db;
+}
+
+/* Responsive Design */
+@media (max-width: 600px) {
+    #pongCanvas {
+        width: 100%;
+        height: auto;
+    }
+    
+    .scoreboard {
+        width: 100%;
+    }
+    
+    .score-section p {
+        font-size: 36px;
+    }
+}
