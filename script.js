@@ -78,20 +78,39 @@ canvas.addEventListener('touchmove', (e) => {
     }
 }, { passive: false });
 
-// Start button
+// Start button - Fix for mobile and desktop
 const startButton = document.getElementById('startButton');
-startButton.addEventListener('click', startGame);
-startButton.addEventListener('touchend', startGame);
 
-function startGame(e) {
+// Click event for desktop
+startButton.addEventListener('click', function(e) {
     e.preventDefault();
+    startGame();
+});
+
+// Touch event for mobile
+startButton.addEventListener('touchstart', function(e) {
+    e.preventDefault();
+    startGame();
+});
+
+// Alternative: Try both mousedown and touchend
+startButton.addEventListener('mousedown', function(e) {
+    if (!gameRunning) {
+        startGame();
+    }
+});
+
+function startGame() {
+    if (gameRunning) return; // Prevent multiple starts
+    
     gameRunning = true;
     playerScore = 0;
     computerScore = 0;
     resetBall();
     updateScore();
     document.getElementById('startButton').disabled = true;
-    document.getElementById('gameStatus').textContent = 'Game Started!';
+    document.getElementById('startButton').textContent = 'Game Running...';
+    document.getElementById('gameStatus').textContent = 'Game Started! Move your paddle!';
     gameLoop();
 }
 
@@ -267,4 +286,5 @@ function endGame() {
     const winner = playerScore > computerScore ? 'Player' : 'Computer';
     document.getElementById('gameStatus').textContent = `Game Over! ${winner} Wins! ${playerScore} - ${computerScore}`;
     document.getElementById('startButton').disabled = false;
+    document.getElementById('startButton').textContent = 'Start Game';
 }
